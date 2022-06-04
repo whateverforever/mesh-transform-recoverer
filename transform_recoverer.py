@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tool that recovers the transforms that were applied to a base "referencemesh"
-from (multiple) copies of that mesh. E.g. the result of Michael Fogleman's `pack3d`.
+from copies of that mesh. E.g. the result of Michael Fogleman's `pack3d`.
 """
 
 import argparse
@@ -18,7 +18,7 @@ np.set_printoptions(suppress=True, precision=3)
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "referencemesh", help="Path to the mesh file for the single object"
+        "referencemesh", help="Path to the mesh file for the reference object"
     )
     parser.add_argument(
         "groupmesh",
@@ -81,8 +81,10 @@ def main():
             verts_orig = np.ones((num_corresps, 4))
             verts_orig[:, :3] = referencemesh.vertices[corresponding_idxs]
             verts_trafod = (T_I2R @ verts_orig.T).T
-            verts_trafod = verts_trafod[:,:3]
-            assert np.allclose(verts_trafod, verts_inst[corresponding_idxs]), "Verification failed, transformed verts don't match :("
+            verts_trafod = verts_trafod[:, :3]
+            assert np.allclose(
+                verts_trafod, verts_inst[corresponding_idxs]
+            ), "Verification failed, transformed verts don't match :("
 
     if args.outcsv:
         logging.info("Writing trafos to %s", args.outcsv)
