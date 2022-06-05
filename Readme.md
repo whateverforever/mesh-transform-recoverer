@@ -3,6 +3,8 @@
 > Tool that recovers the transforms that were applied to a base "referencemesh"
 > from copies of that mesh. E.g. the result of Michael Fogleman's [pack3d](https://www.michaelfogleman.com/pack3d/)
 
+![illustration showing unknown transforms between a reference object and multiple instances of it. suzanne from blender.](illustration.png)
+
 ```
 $ ./transform_recoverer.py --help                                                                                                            
 usage: transform_recoverer.py [-h] [--outcsv OUTCSV] [--verify]
